@@ -1,0 +1,224 @@
+html {
+    background: white;
+}
+@font-face {
+    font-family: BebasNeue;
+    src: url(../fonts/BebasNeue.otf);
+}
+@font-face {
+    font-family: VCR;
+    src: url(../fonts/VCR_OSD_MONO_1.001.ttf);
+}
+.search-flight {
+    padding: 30px;
+    height: 395px;
+}
+
+.search-flight h1 {
+    font-family: 'Taviraj', serif;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 30px;
+}
+
+fieldset {
+    box-sizing: border-box;
+    margin: 20px;
+    width: 100%;
+    height: 100px;
+    border: none;
+}
+
+.flight-getter {
+    text-align: center;
+}
+
+input {
+    background-color: white;
+    font-family: Roboto;
+    border-radius: 8px;
+    font-color: black;
+    text-align: center;
+    height: 49px;
+    width: 193px;
+}
+
+.buttons {
+    text-align: center;
+    /*border: 1px solid black;*/
+    margin: 20px;
+    padding: 15px;
+}
+
+button {
+    font-family: Roboto;
+    height: 30px;
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 2px 0 0 2px;
+    display: inline-block;
+}
+button:hover{
+    border: none;
+}
+
+main {
+    background-color: #3a3032;
+    box-sizing: border-box;
+    /*border-radius: 8px;*/
+    padding: 20px;
+    width: 100%;
+}
+
+.search-container {
+    background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/Tumblr-wallpapers-hd.jpg);
+    background-size: cover;
+    font-family: Roboto;
+    width: 70%;
+    color: white;
+    height: 450px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    display: inline-block;
+    /*border: 1px solid white;*/
+    margin: 2.5%;
+    float: right;
+}
+
+.left-col {
+    background-image: url("../images/old-white-background.jpg");
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    width: 20%;
+    margin: 2.5%;
+    height: 450px;
+}
+
+.templates {
+    display: none;
+}
+
+.search-container::-webkit-scrollbar {
+    display: none;
+}
+
+.results {
+    width: 100%;
+}
+
+dl {
+    /*border: 1px solid white;*/
+    /*        border-left: none;
+    border-right: none;*/
+    box-sizing: border-box;
+    margin: 40px;
+    padding: 10px;
+    height: 204px;
+    position: relative;
+}
+
+.resultBox {
+    height: 182px;
+}
+
+.price-box {
+    /*border: 1px solid white;*/
+    width: 22%;
+    color: white;
+    position: absolute;
+    left: 19px;
+    top: 60px;
+}
+
+.price-box dd {
+    font-family: BebasNeue;
+    font-size: 4.5em;
+    text-align: center;
+/*    margin: 0 auto;
+    margin-top: 64%;
+    margin-left: 56%;*/
+}
+
+.airline-info {
+    /*border: 1px solid white;*/
+    width: 75%;
+    height: 89%;
+    position: absolute;
+    top: 17px;
+    left: 254px;
+}
+
+.flightDetails {
+    box-sizing: border-box;
+    width: 80%;
+    /*border: 1px solid white;*/
+    margin: 30px;
+}
+
+dd {
+    font-family: VCR;
+    font-size: 18px;
+    margin: 8px;
+}
+
+.flightDetails dd {
+    text-align: center;
+    display: inline-block;
+}
+
+.flightDetails i {
+    padding: 10px;
+}
+
+.planes {
+    /*border: 1px solid white;*/
+    box-sizing: border-box;
+    width: 80%;
+    margin: 30px;
+}
+
+.planes dd {
+    text-align: center;
+    display: inline-block;
+}
+
+footer {
+    clear: both;
+    height: 175px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    background-color: #c7a5a5;
+}
+
+.aboutMe {
+    height: 50%;
+}
+
+.contact {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+
+.contact a {
+    font-size: 28px;
+    color: #5c495f;
+    font-weight: lighter;
+    padding: 20px;
+}
+
+.contact a:hover {
+    color: white;
+}
+
+.contact ul {}
+
+li {
+    list-style-type: none;
+    display: inline-block;
+}

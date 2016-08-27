@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,900' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Taviraj" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/float-grid.css">
+    <!-- Normalize.css, a cross-browser reset file -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Traveling Companion</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <section class="cd-hero">
+        <ul class="cd-hero-slider">
+            <li class="selected">
+                <div class="cd-full-width">
+                    <h2>New York City</h2>
+                    <a href="#0" id="NYC" class="cd-btn">Check Flights</a>
+                </div>
+                <!-- .cd-full-width -->
+            </li>
+            <li>
+                <div class="cd-full-width">
+                    <h2>San Francisco</h2>
+                    <a href="#0" id="SFO" class="cd-btn">Check Flights</a>
+                </div>
+                <!-- .cd-full-width -->
+            </li>
+            <li>
+                <div class="cd-full-width">
+                    <h2>Houston</h2>
+                    <a href="#0" id="HOU" class="cd-btn">Check Flights</a>
+                </div>
+                <!-- .cd-full-width -->
+            </li>
+            <li>
+                <div class="cd-full-width">
+                    <h2>Miami</h2>
+                    <a href="#0" id="MIA" class="cd-btn">Check Flights</a>
+                </div>
+                <!-- .cd-full-width -->
+            </li>
+        </ul>
+        <!-- .cd-hero-slider -->
+        <div class="cd-slider-nav">
+            <nav>
+                <span class="cd-marker item-1"></span>
+                <ul>
+                    <li class="selected"><a href="#">NYC</a></li>
+                    <li><a href="#">SFO</a></li>
+                    <li><a href="#">HOU</a></li>
+                    <li><a href="#">MIA</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- .cd-slider-nav -->
+    </section>
+    <!-- .cd-hero -->
+    <div class="search-flight">
+        <h1>Find your Flight</h1>
+        <fieldset>
+            <form class="flight-getter">
+                <input id="airports" name="from" type="text" placeholder="Departing Airport" required>
+                <!-- <i class="fa fa-plane" aria-hidden="true"></i> -->
+                <input id="airports" name="to" type="text" placeholder="Arrival Airport" required>
+                <label>
+                    <!-- <i class="fa fa-calendar" aria-hidden="true"></i> --></label>
+                <input name="date" type="date" placeholder="YYYY-MM-DD" required>
+                <div class="buttons">
+                    <button class="submit">Submit</button>
+                    <button class="clear">Clear</button>
+            </form>
+            </div>
+        </fieldset>
+    </div>
+    <main>
+        <div class="search-container">
+            <div class="results">
+            </div>
+        </div>
+        <div class="templates hidden">
+            <dl class="result search">
+                <div class="resultBox">
+                    <div class="price-box">
+                        <dd class="price"></dd>
+                    </div>
+                    <div class="airline-info">
+                        <div class="flightDetails">
+                            <dd class="deptPort"></dd>
+                            <dd class="departure-time"></dd><i class="fa fa-plane" aria-hidden="true"></i>
+                            <dd class="arrPort"></dd>
+                            <dd class="arrival-time"></dd>
+                        </div>
+                        <div class="planes">
+                            <dd class="airline-name"></dd>
+                            <dd class="flight-number"></dd>
+                        </div>
+                    </div>
+                </div>
+            </dl>
+        </div>
+        <div class="left-col"></div>
+    </main>
+    <!--       <section class="weather">
+            <div class="weather-container">
+                <div class="weather-results">
+                    <img>
+                </div>
+            </div>
+        </section> -->
+    <!--     <div class="picture-container">
+        <div class="pictures">
+        </div>
+        <div class="picture-clone">
+            <img>
+        </div>
+    </div>  -->
+    <!--     <div class="gallery-container">
+        <div class="image-box">
+            <div><img src="pictures/machupicchu.jpeg"></div>
+            <div><img src="pictures/ruins.jpeg"></div>
+            <div><img src="pictures/cuzcoplaza.jpeg"></div>
+        </div>
+    </div> -->
+    <footer>
+        <div class="aboutMe"></div>
+        <div class="contact">
+            <ul>
+                <li><a href="https://www.instagram.com/nikkotoonaughty/"><span class="fa fa-instagram" aria-hidden="true"></span></a></li>
+                <li><a href="https://www.facebook.com/NikkosWacko"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
+                <li><a href=""><span class="fa fa-linkedin" aria-hidden="true"></span></a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="js/jquery.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script type="js/airport.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src ="js/app.js"></script>
+</body>
+
+</html>
