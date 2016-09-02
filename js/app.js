@@ -35,10 +35,7 @@ $(function() {
     });
 })
 
-
-
 var getResults = function(dept, arr, date) {
-
     var url = "http://terminal2.expedia.com/x/mflights/search";
     var params = {
         apikey: 'Uyg714nBLezX9YjKGkmNGDuI5kJi9xUB',
@@ -46,22 +43,14 @@ var getResults = function(dept, arr, date) {
         arrivalAirport: arr,
         departureDate: date
     }
-
     $.ajax({
         url: url,
         data: params,
         dataType: 'json',
         type: 'GET',
     }).done(function(data) {
-
         console.log(data);
-
-        var searchResults = showSearchResults(dept, arr, data.legs.length);
-
-        $('.search-results').html(searchResults);
-
         for (var i = 0; i < data.legs.length; i++) {
-
             var offer = data.offers[i];
             var segments = data.legs[i].segments;
             var flight = flightInfo(segments[0], offer);
@@ -69,30 +58,22 @@ var getResults = function(dept, arr, date) {
             $('.results').append('<hr>');
         }
     }).fail(function() {
-
         alert('error');
     })
 }
 
 var flightInfo = function(segment, offer) {
-
     var results = $('.templates .search').clone();
-
     var aTime = getTime(segment.arrivalTimeRaw);
     var dTime = getTime(segment.departureTimeRaw);
-
     var deptPort = results.find('.deptPort').text(segment.departureAirportCode)
-
     var arrPort = "";
-
     var price = results.find('.price').text(offer.totalFare);
     var flightNumber = results.find('.flight-number').text(segment.airlineCode + " " + segment.flightNumber);
     var airline = results.find('.airline-name').text(segment.airlineName);
     var departureTime = results.find('.departure-time').text(dTime);
     var arrivalTime = "";
     var nonStop = true;
-
-
 
     var checkNonStop = function(segment) {
         if (segment.length <= 1) {
@@ -108,15 +89,6 @@ var flightInfo = function(segment, offer) {
     checkNonStop(segment);
     return results;
 }
-
-
-
-var showSearchResults = function(deptPort, arrPort, resultNum) {
-
-    var results = '<h2>' + resultNum + ' flights leaving from ' + deptPort + ' to ' + arrPort + '</h2>';
-    return results;
-}
-
 
 var getTime = function(segment) {
     var d = new Date(segment);
@@ -138,7 +110,8 @@ var getTime = function(segment) {
     return h + ":" + m + " " + dd;
 }
 
-getResults("LAX", "SFO", "2016-09-24");
+// getResults("LAX", "SFO", "2016-09-24");
+
 
 
 jQuery(document).ready(function($) {
