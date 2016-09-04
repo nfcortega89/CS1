@@ -5,9 +5,7 @@ $(function() {
         var arrival = $(this).find("input[name='to']").val();
         var date = $(this).find("input[name='date']").val();
         getResults(departure, arrival, date);
-        console.log(getResults);
     })
-
     $('.clear').on('click', function(e) {
         e.preventDefault();
         $('.results').empty();
@@ -17,7 +15,6 @@ $(function() {
         e.preventDefault();
         $("input[name='to']").val("JFK");
     })
-
     $("#SFO").on('click', function(e) {
         e.preventDefault();
         $("input[name='to']").val("SFO");
@@ -35,10 +32,7 @@ $(function() {
     });
 })
 
-
-
 var getResults = function(dept, arr, date) {
-
     var url = "http://terminal2.expedia.com/x/mflights/search";
     var params = {
         apikey: 'Uyg714nBLezX9YjKGkmNGDuI5kJi9xUB',
@@ -46,100 +40,83 @@ var getResults = function(dept, arr, date) {
         arrivalAirport: arr,
         departureDate: date
     }
-
     $.ajax({
         url: url,
         data: params,
         dataType: 'json',
         type: 'GET',
     }).done(function(data) {
-
-        console.log(data);
-
-        var searchResults = showSearchResults(dept, arr, data.legs.length);
-
-        $('.search-results').html(searchResults);
-
         for (var i = 0; i < data.legs.length; i++) {
-
             var offer = data.offers[i];
             var segments = data.legs[i].segments;
-            var flight = flightInfo(segments[0], offer);
-            $('.results').append(flight);
-            $('.results').append('<hr>');
+            var airlinesArr = [];
+            var airArr = [];
+            var timeArr = [];
+            for (var j = 0; j < segments.length; j++) {
+                var airlineNames = segments[j].airlineName;
+                var arrivalPorts = segments[j].arrivalAirportCode;
+                var arrTime = segments[j].arrivalTimeRaw;
+                airlinesArr.push(airlineNames)
+                timeArr.push(arrTime)
+                airArr.push(arrivalPorts)
+            }
+            var flightNumb = segments[0].airlineCode + " " + segments[0].flightNumber;
+            var depAir = segments[0].departureAirportCode;
+            var depTime = segments[0].departureTimeRaw;
+            var price = offer.totalFare;
+            var numTic = offer.numberOfTickets;
+            var seats = offer.seatsRemaining;
+            var allFlights = new Flight(price, airlinesArr, flightNumb, depAir, depTime, airArr, timeArr, numTic, seats);
+            var output = allFlights.print();
+            $('.results').append(output);
+            $('.results').append("<hr>");
         }
     }).fail(function() {
-
         alert('error');
     })
 }
-
-var flightInfo = function(segment, offer) {
-
-    var results = $('.templates .search').clone();
-
-    var aTime = getTime(segment.arrivalTimeRaw);
-    var dTime = getTime(segment.departureTimeRaw);
-
-    var deptPort = results.find('.deptPort').text(segment.departureAirportCode)
-
-    var arrPort = "";
-
-    var price = results.find('.price').text(offer.totalFare);
-    var flightNumber = results.find('.flight-number').text(segment.airlineCode + " " + segment.flightNumber);
-    var airline = results.find('.airline-name').text(segment.airlineName);
-    var departureTime = results.find('.departure-time').text(dTime);
-    var arrivalTime = "";
-    var nonStop = true;
-
-
-
-    var checkNonStop = function(segment) {
-        if (segment.length <= 1) {
-            nonStop = false;
-            arrPort = results.find('.arrPort').text(segment.arrivalAirportCode.pop());
-            arrivalTime = results.find('.arrival-time').text(getTime(segment.arrivalTimeRaw).pop());
-        } else {
-            arrPort = results.find('.arrPort').text(segment.arrivalAirportCode);
-            arrivalTime = results.find('.arrival-time').text(aTime);
-        }
-        return arrPort, arrivalTime;
+function Flight(price, airlines, flightNum, deptPort, departureTime, arrivalPort, arrivalTime, tickets, seatsRemaining) {
+    this.price = price;
+    this.airlines = airlines;
+    this.flightNum = flightNum;
+    this.deptPort = deptPort;
+    this.departureTime = departureTime;
+    this.arrivalPort = arrivalPort;
+    this.arrivalTime = arrivalTime;
+    this.tickets = tickets;
+    this.seatsRemaining = seatsRemaining;
+    this.print = function() {
+        var results = $('.templates .search').clone();
+        var flightPrice = results.find('.price').text(this.price);
+        var flightAirline = results.find('.airline-name').text(this.airlines[0]);
+        var flightNumbers = results.find('.flight-number').text(this.flightNum);
+        var aTime = getTime(this.arrivalTime.pop());
+        var dTime = getTime(this.departureTime);
+        var flightArriveTime = results.find('.arrival-time').text(aTime);
+        var flightArrivePort = results.find('.arrPort').text(this.arrivalPort.pop());
+        var flightDepartPort = results.find('.deptPort').text(this.deptPort);
+        var flightDepartTime = results.find('.departure-time').text(dTime);
+        var seatsRemaining = results.find('.seatsRemaning').text("Seats Reamaining: " + this.seatsRemaining);
+        return results;
     }
-    checkNonStop(segment);
-    return results;
-}
-
-
-
-var showSearchResults = function(deptPort, arrPort, resultNum) {
-
-    var results = '<h2>' + resultNum + ' flights leaving from ' + deptPort + ' to ' + arrPort + '</h2>';
-    return results;
-}
-
-
-var getTime = function(segment) {
-    var d = new Date(segment);
-    var hh = d.getHours();
-    var m = d.getMinutes();
-
-    var dd = "AM";
-    var h = hh;
-
-    if (h >= 12) {
-        h = hh - 12;
-        dd = "PM";
+};
+var getTime = function(time) {
+    var currDate = new Date(time);
+    var hours = currDate.getMonth();
+    var min = currDate.getMinutes();
+    var amPm = "AM";
+    var copyH = hours;
+    if (copyH >= 12) {
+        hours = copyH - 12;
+        amPm = "PM";
     }
-    if (h == 0) {
+    if (copyH == 0) {
         h = 12;
     }
-    m = m < 10 ? "0" + m : m
 
-    return h + ":" + m + " " + dd;
-}
-
-getResults("LAX", "SFO", "2016-09-24");
-
+    min = min < 10 ? "0" + min : min
+    return hours + ":" + min + " " + amPm;
+};
 
 jQuery(document).ready(function($) {
     var slidesWrapper = $('.cd-hero-slider');
@@ -248,3 +225,4 @@ jQuery(document).ready(function($) {
         return this;
     };
 });
+
